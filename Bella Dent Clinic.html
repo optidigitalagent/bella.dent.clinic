@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bella Dent Clinic — Стоматологія, якій довіряють</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream:    #FAF7F2;
+    --beige:    #F0E8DC;
+    --warm:     #E8DDD0;
+    --brown-lt: #C4A882;
+    --brown:    #8A6645;
+    --brown-dk: #3D2710;
+    --ink:      #261A0E;
+    --muted:    #8C7B6A;
+    --serif:    'Playfair Display', Georgia, serif;
+    --sans:     'DM Sans', system-ui, sans-serif;
+    --ease:     cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 60px;
+    transition: background 0.5s var(--ease), padding 0.4s var(--ease);
+  }
+  nav.scrolled {
+    background: rgba(250,247,242,0.94);
+    backdrop-filter: blur(12px);
+    padding: 18px 60px;
+    border-bottom: 1px solid rgba(138,102,69,0.1);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 17px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--brown); }
+  .nav-links {
+    display: flex; gap: 40px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--brown-dk); text-decoration: none; font-weight: 500;
+    border-bottom: 1px solid var(--brown-lt);
+    padding-bottom: 2px;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .nav-cta:hover { color: var(--brown); border-color: var(--brown); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 140px 40px 100px;
+    background: linear-gradient(160deg, var(--cream) 0%, var(--beige) 60%, var(--warm) 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 30%, rgba(196,168,130,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 70%, rgba(196,168,130,0.08) 0%, transparent 70%);
+  }
+  .hero-inner { position: relative; max-width: 780px; }
+  .hero-eyebrow {
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--brown); margin-bottom: 36px;
+    opacity: 0; transform: translateY(16px);
+    animation: fadeUp 0.9s var(--ease) 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(44px, 6vw, 78px);
+    font-weight: 400; line-height: 1.12;
+    color: var(--ink); margin-bottom: 28px;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 1s var(--ease) 0.4s forwards;
+  }
+  .hero h1 em { font-style: italic; color: var(--brown); }
+  .hero-sub {
+    font-size: 17px; color: var(--muted); font-weight: 300;
+    max-width: 520px; margin: 0 auto 56px;
+    opacity: 0; transform: translateY(16px);
+    animation: fadeUp 1s var(--ease) 0.65s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+    opacity: 0; transform: translateY(16px);
+    animation: fadeUp 1s var(--ease) 0.85s forwards;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--brown-dk); color: var(--cream);
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 17px 36px; text-decoration: none;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .btn-primary:hover { background: var(--brown); transform: translateY(-1px); }
+  .btn-ghost {
+    display: inline-block;
+    border: 1px solid rgba(61,39,16,0.25); color: var(--ink);
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 17px 36px; text-decoration: none;
+    transition: border-color 0.3s, color 0.3s, transform 0.3s;
+  }
+  .btn-ghost:hover { border-color: var(--brown); color: var(--brown); transform: translateY(-1px); }
+  .hero-scroll {
+    position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0; animation: fadeUp 1s var(--ease) 1.4s forwards;
+  }
+  .hero-scroll span {
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--brown-lt);
+  }
+  .scroll-line {
+    width: 1px; height: 40px; background: linear-gradient(to bottom, var(--brown-lt), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 120px 60px; }
+  .section-label {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--brown-lt); margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400; line-height: 1.2; color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .section-title em { font-style: italic; color: var(--brown); }
+  .section-body {
+    font-size: 16px; color: var(--muted); max-width: 520px;
+    font-weight: 300; line-height: 1.8;
+  }
+  .divider {
+    width: 48px; height: 1px; background: var(--brown-lt); margin: 48px 0;
+  }
+
+  /* reveal animation */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── TRUST NUMBERS ── */
+  .trust-band {
+    padding: 70px 60px;
+    background: var(--brown-dk); color: var(--cream);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; text-align: center;
+  }
+  .trust-stat {
+    padding: 40px 20px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .trust-stat:last-child { border-right: none; }
+  .trust-num {
+    font-family: var(--serif); font-size: 54px; font-weight: 400;
+    color: var(--brown-lt); line-height: 1; margin-bottom: 12px;
+  }
+  .trust-desc {
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(250,247,242,0.5);
+  }
+
+  /* ── SERVICES ── */
+  .services-section { background: var(--cream); }
+  .services-header {
+    max-width: 1200px; margin: 0 auto 80px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .services-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
+  }
+  .service-card {
+    background: var(--beige); padding: 52px 36px;
+    position: relative; overflow: hidden;
+    transition: background 0.4s var(--ease), transform 0.4s var(--ease);
+    cursor: default;
+  }
+  .service-card:hover { background: var(--warm); transform: translateY(-4px); }
+  .service-num {
+    font-family: var(--serif); font-size: 11px; letter-spacing: 0.12em;
+    color: var(--brown-lt); margin-bottom: 48px; display: block;
+  }
+  .service-name {
+    font-family: var(--serif); font-size: 20px; font-weight: 400;
+    color: var(--ink); margin-bottom: 20px; line-height: 1.3;
+  }
+  .service-desc {
+    font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 300;
+  }
+  .service-line {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: var(--brown-lt);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.5s var(--ease);
+  }
+  .service-card:hover .service-line { transform: scaleX(1); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-section { background: var(--beige); }
+  .testimonials-inner { max-width: 1200px; margin: 0 auto; }
+  .testimonials-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 80px;
+  }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  }
+  .testimonial-card {
+    background: var(--cream); padding: 52px 44px;
+    position: relative;
+  }
+  .t-stars {
+    display: flex; gap: 4px; margin-bottom: 32px;
+  }
+  .t-star {
+    width: 14px; height: 14px;
+    background: var(--brown-lt); clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  }
+  .t-text {
+    font-family: var(--serif); font-size: 17px; font-style: italic;
+    color: var(--ink); line-height: 1.7; margin-bottom: 36px;
+  }
+  .t-author {
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--brown); font-weight: 500;
+  }
+  .t-quote {
+    position: absolute; top: 40px; right: 44px;
+    font-family: var(--serif); font-size: 80px; color: var(--beige);
+    line-height: 1; user-select: none;
+  }
+
+  /* ── PRICING ── */
+  .pricing-section { background: var(--cream); }
+  .pricing-inner { max-width: 960px; margin: 0 auto; }
+  .pricing-header { margin-bottom: 80px; }
+  .pricing-tabs {
+    display: flex; gap: 0; margin-bottom: 64px;
+    border-bottom: 1px solid var(--warm);
+  }
+  .tab-btn {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); background: none;
+    border: none; padding: 16px 32px; cursor: pointer;
+    position: relative; transition: color 0.3s;
+  }
+  .tab-btn::after {
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 1px; background: var(--brown-dk);
+    transform: scaleX(0); transition: transform 0.3s var(--ease);
+  }
+  .tab-btn.active { color: var(--ink); }
+  .tab-btn.active::after { transform: scaleX(1); }
+  .tab-btn:hover { color: var(--ink); }
+
+  .price-panel { display: none; }
+  .price-panel.active { display: block; }
+  .price-item {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 22px 0; border-bottom: 1px solid rgba(196,168,130,0.2);
+    gap: 24px;
+  }
+  .price-item:first-child { border-top: 1px solid rgba(196,168,130,0.2); }
+  .price-name {
+    font-size: 15px; color: var(--ink); flex: 1; font-weight: 300;
+  }
+  .price-dots {
+    flex: 1; border-bottom: 1px dotted rgba(196,168,130,0.4);
+    margin: 0 16px; align-self: baseline; margin-bottom: 4px;
+    min-width: 40px;
+  }
+  .price-val {
+    font-family: var(--serif); font-size: 16px; color: var(--brown);
+    white-space: nowrap; font-style: italic;
+  }
+
+  /* ── PHILOSOPHY ── */
+  .philosophy-section {
+    background: var(--brown-dk); color: var(--cream);
+    padding: 140px 60px;
+  }
+  .philosophy-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 120px;
+    align-items: center;
+  }
+  .philosophy-left .section-label { color: var(--brown-lt); }
+  .philosophy-title {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 58px);
+    font-weight: 400; line-height: 1.2; color: var(--cream);
+    margin-bottom: 32px;
+  }
+  .philosophy-title em { font-style: italic; color: var(--brown-lt); }
+  .philosophy-body {
+    font-size: 15px; color: rgba(250,247,242,0.6);
+    font-weight: 300; line-height: 1.9;
+  }
+  .philosophy-pillars {
+    display: flex; flex-direction: column; gap: 40px;
+  }
+  .pillar {
+    padding-left: 32px;
+    border-left: 1px solid rgba(196,168,130,0.3);
+  }
+  .pillar-title {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    color: var(--cream); margin-bottom: 10px;
+  }
+  .pillar-text {
+    font-size: 14px; color: rgba(250,247,242,0.5);
+    font-weight: 300; line-height: 1.8;
+  }
+
+  /* ── PROCESS ── */
+  .process-section { background: var(--beige); }
+  .process-inner { max-width: 1200px; margin: 0 auto; }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    margin-top: 72px;
+  }
+  .process-step {
+    background: var(--cream); padding: 52px 40px;
+    position: relative;
+  }
+  .process-step::after {
+    content: '→';
+    position: absolute; right: -16px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--brown-lt); font-size: 18px; z-index: 2;
+  }
+  .process-step:last-child::after { display: none; }
+  .step-num {
+    font-family: var(--serif); font-size: 56px; font-weight: 400;
+    color: var(--beige); line-height: 1; margin-bottom: 24px;
+  }
+  .step-title {
+    font-family: var(--serif); font-size: 20px; font-weight: 400;
+    color: var(--ink); margin-bottom: 14px;
+  }
+  .step-desc {
+    font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 300;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section { background: var(--cream); }
+  .contact-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+    align-items: start;
+  }
+  .contact-info { }
+  .contact-detail {
+    margin-top: 48px; display: flex; flex-direction: column; gap: 32px;
+  }
+  .contact-row {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .contact-row-label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--brown-lt);
+  }
+  .contact-row-val {
+    font-family: var(--serif); font-size: 20px; color: var(--ink);
+    font-weight: 400;
+  }
+  .contact-row-val a {
+    color: inherit; text-decoration: none;
+    border-bottom: 1px solid var(--brown-lt);
+    transition: color 0.3s;
+  }
+  .contact-row-val a:hover { color: var(--brown); }
+  .hours-grid {
+    display: grid; grid-template-columns: auto 1fr; gap: 8px 24px;
+    font-size: 15px; color: var(--ink);
+  }
+  .hours-day { color: var(--muted); font-weight: 300; font-size: 14px; }
+  .hours-time { font-weight: 400; }
+  .map-placeholder {
+    width: 100%; aspect-ratio: 4/3;
+    background: var(--beige);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .map-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(196,168,130,0.08) 20px,
+      rgba(196,168,130,0.08) 21px
+    );
+  }
+  .map-label {
+    font-family: var(--sans); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--brown-lt);
+    text-align: center; position: relative; z-index: 1;
+    line-height: 1.8;
+  }
+
+  /* ── FINAL CTA ── */
+  .cta-section {
+    padding: 160px 60px;
+    background: linear-gradient(160deg, var(--beige) 0%, var(--warm) 100%);
+    text-align: center;
+  }
+  .cta-section .section-label { text-align: center; }
+  .cta-title {
+    font-family: var(--serif); font-size: clamp(36px, 5vw, 64px);
+    font-weight: 400; line-height: 1.2; color: var(--ink);
+    max-width: 700px; margin: 0 auto 20px;
+  }
+  .cta-title em { font-style: italic; color: var(--brown); }
+  .cta-sub {
+    font-size: 16px; color: var(--muted); margin-bottom: 52px; font-weight: 300;
+  }
+  .cta-phone {
+    display: block; font-family: var(--serif); font-size: 28px;
+    color: var(--brown); text-decoration: none; margin-top: 40px;
+    transition: color 0.3s;
+  }
+  .cta-phone:hover { color: var(--brown-dk); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--brown-dk); color: rgba(250,247,242,0.4);
+    padding: 52px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; letter-spacing: 0.06em;
+  }
+  footer .footer-brand {
+    font-family: var(--serif); font-size: 15px;
+    color: rgba(250,247,242,0.7); letter-spacing: 0.04em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 28px; }
+    nav.scrolled { padding: 14px 28px; }
+    .nav-links { display: none; }
+    section { padding: 80px 28px; }
+    .trust-band { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .philosophy-inner { grid-template-columns: 1fr; gap: 60px; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 60px; }
+    .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .testimonials-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .cta-section { padding: 100px 28px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 40px 28px; }
+    .pricing-tabs { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Bella Dent <span>Clinic</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Послуги</a></li>
+    <li><a href="#pricing">Прайс</a></li>
+    <li><a href="#about">Про нас</a></li>
+    <li><a href="#contact">Контакти</a></li>
+  </ul>
+  <a href="tel:+380964303719" class="nav-cta">+380 96 430 37 19</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Bella Dent Clinic — Кривий Ріг</p>
+    <h1>Стоматологія,<br><em>якій довіряють</em></h1>
+    <p class="hero-sub">Комплексне лікування, сучасні технології, турбота про кожного пацієнта</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Записатись на консультацію</a>
+      <a href="#services" class="btn-ghost">Переглянути послуги</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Гортайте</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TRUST NUMBERS -->
+<div class="trust-band">
+  <div class="trust-stat reveal">
+    <div class="trust-num">10+</div>
+    <div class="trust-desc">Років досвіду</div>
+  </div>
+  <div class="trust-stat reveal reveal-delay-1">
+    <div class="trust-num">2 368</div>
+    <div class="trust-desc">Пацієнтів</div>
+  </div>
+  <div class="trust-stat reveal reveal-delay-2">
+    <div class="trust-num">5</div>
+    <div class="trust-desc">Напрямків лікування</div>
+  </div>
+  <div class="trust-stat reveal reveal-delay-3">
+    <div class="trust-num">100%</div>
+    <div class="trust-desc">Безпечна анестезія</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="services-header">
+    <div>
+      <p class="section-label reveal">Наші послуги</p>
+      <h2 class="section-title reveal reveal-delay-1">Все, що потрібно<br><em>для здоров'я зубів</em></h2>
+    </div>
+    <p class="section-body reveal reveal-delay-2" style="max-width:340px;">Комплексна стоматологія під одним дахом — від профілактики до складної хірургії.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-num">01</span>
+      <h3 class="service-name">Терапевтична стоматологія</h3>
+      <p class="service-desc">Лікування карієсу, пломбування, зняття зубних відкладень, пломбування кореневих каналів під мікроскопом.</p>
+      <div class="service-line"></div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-num">02</span>
+      <h3 class="service-name">Ортодонтія</h3>
+      <p class="service-desc">Фіксація металічних, сапфірових та самолігуючих брекет-систем. Ретейнери та знімні апарати.</p>
+      <div class="service-line"></div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-num">03</span>
+      <h3 class="service-name">Ортопедія</h3>
+      <p class="service-desc">Знімні та незнімні протези, керамічні та металокерамічні коронки, циркон, імплантація.</p>
+      <div class="service-line"></div>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <span class="service-num">04</span>
+      <h3 class="service-name">Естетична стоматологія</h3>
+      <p class="service-desc">Професійне відбілювання зубів, виготовлення вінірів з кераміки та діоксиду цирконію.</p>
+      <div class="service-line"></div>
+    </div>
+    <div class="service-card reveal reveal-delay-4">
+      <span class="service-num">05</span>
+      <h3 class="service-name">Хірургія</h3>
+      <p class="service-desc">Імплантація, синус-ліфтинг, кісткова аугментація, видалення зубів мудрості, цистектомія.</p>
+      <div class="service-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="reviews">
+  <div class="testimonials-inner">
+    <div class="testimonials-header">
+      <div>
+        <p class="section-label reveal">Відгуки пацієнтів</p>
+        <h2 class="section-title reveal reveal-delay-1">Нам <em>довіряють</em></h2>
+      </div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="t-stars">
+          <div class="t-star"></div><div class="t-star"></div><div class="t-star"></div>
+          <div class="t-star"></div><div class="t-star"></div>
+        </div>
+        <p class="t-text">«Після кількох невдалих спроб в інших клініках звернулась сюди. Без зайвих розмов, дуже швидко надали необхідну допомогу. Не могла повірити, що таке можливо. Дякую величезне!»</p>
+        <span class="t-author">Нелля Бекало</span>
+        <div class="t-quote">"</div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="t-stars">
+          <div class="t-star"></div><div class="t-star"></div><div class="t-star"></div>
+          <div class="t-star"></div><div class="t-star"></div>
+        </div>
+        <p class="t-text">«Дякую Ігорю Євгеновичу та Івану Михайловичу за допомогу і вирішення мого складного питання. Справжні професіонали своєї справи. Рекомендую!»</p>
+        <span class="t-author">Аліна Черняєва</span>
+        <div class="t-quote">"</div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="t-stars">
+          <div class="t-star"></div><div class="t-star"></div><div class="t-star"></div>
+          <div class="t-star"></div><div class="t-star"></div>
+        </div>
+        <p class="t-text">«Для мене лікар — найкращий. Після першої зустрічі я перестала боятись стоматології. Зараз при відвіданні лише легке хвилювання — і все. Дякую за довіру!»</p>
+        <span class="t-author">K. Cherenova</span>
+        <div class="t-quote">"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-inner">
+    <div class="pricing-header">
+      <p class="section-label reveal">Вартість лікування</p>
+      <h2 class="section-title reveal reveal-delay-1">Прозорі <em>ціни</em></h2>
+      <p class="section-body reveal reveal-delay-2">Ніяких прихованих платежів. Кінцева вартість узгоджується до початку лікування.</p>
+    </div>
+
+    <div class="pricing-tabs reveal">
+      <button class="tab-btn active" onclick="switchTab('therapy', this)">Терапія</button>
+      <button class="tab-btn" onclick="switchTab('implant', this)">Імплантація</button>
+      <button class="tab-btn" onclick="switchTab('ortho', this)">Ортодонтія</button>
+      <button class="tab-btn" onclick="switchTab('surgery', this)">Хірургія</button>
+    </div>
+
+    <div class="price-panel active" id="tab-therapy">
+      <div class="price-item"><span class="price-name">Консультація розширена з плануванням лікування</span><div class="price-dots"></div><span class="price-val">600 грн</span></div>
+      <div class="price-item"><span class="price-name">Анестезія</span><div class="price-dots"></div><span class="price-val">300 грн</span></div>
+      <div class="price-item"><span class="price-name">Діагностичний знімок</span><div class="price-dots"></div><span class="price-val">250 грн</span></div>
+      <div class="price-item"><span class="price-name">Зняття зубних відкладень (ультразвук)</span><div class="price-dots"></div><span class="price-val">2 300 грн</span></div>
+      <div class="price-item"><span class="price-name">Лікування карієсу (поверхнева порожнина)</span><div class="price-dots"></div><span class="price-val">1 200 грн</span></div>
+      <div class="price-item"><span class="price-name">Лікування карієсу (середня порожнина)</span><div class="price-dots"></div><span class="price-val">1 400 грн</span></div>
+      <div class="price-item"><span class="price-name">Лікування карієсу (глибока порожнина)</span><div class="price-dots"></div><span class="price-val">1 700 грн</span></div>
+      <div class="price-item"><span class="price-name">Відбілювання зубів (система Opalescence)</span><div class="price-dots"></div><span class="price-val">500 грн</span></div>
+      <div class="price-item"><span class="price-name">Відбілювання зубів (офісне)</span><div class="price-dots"></div><span class="price-val">4 000 грн</span></div>
+    </div>
+
+    <div class="price-panel" id="tab-implant">
+      <div class="price-item"><span class="price-name">Імпланти Alfa Bio (Ізраїль)</span><div class="price-dots"></div><span class="price-val">400 у.о.</span></div>
+      <div class="price-item"><span class="price-name">Імпланти B&B (Італія)</span><div class="price-dots"></div><span class="price-val">450 у.о.</span></div>
+      <div class="price-item"><span class="price-name">Імпланти MEGAGEN Anyridge (Корея)</span><div class="price-dots"></div><span class="price-val">450 у.о.</span></div>
+      <div class="price-item"><span class="price-name">Імпланти MEGAGEN AnyOne (Корея)</span><div class="price-dots"></div><span class="price-val">400 у.о.</span></div>
+      <div class="price-item"><span class="price-name">Виготовлення шаблону на імплантацію</span><div class="price-dots"></div><span class="price-val">55–100 у.о.</span></div>
+      <div class="price-item"><span class="price-name">Мультіюніт</span><div class="price-dots"></div><span class="price-val">4 000 грн</span></div>
+      <div class="price-item"><span class="price-name">Циркон. індивідуальний абатмент</span><div class="price-dots"></div><span class="price-val">4 500 грн</span></div>
+      <div class="price-item"><span class="price-name">Коронка з діоксиду цирконію на імплант</span><div class="price-dots"></div><span class="price-val">8 000 грн</span></div>
+      <div class="price-item"><span class="price-name">Імплант Сервіс</span><div class="price-dots"></div><span class="price-val">3 000 грн</span></div>
+    </div>
+
+    <div class="price-panel" id="tab-ortho">
+      <div class="price-item"><span class="price-name">Консультація</span><div class="price-dots"></div><span class="price-val">700 грн</span></div>
+      <div class="price-item"><span class="price-name">Фіксація металічної брекет-системи (1 щелепа)</span><div class="price-dots"></div><span class="price-val">15 000 грн</span></div>
+      <div class="price-item"><span class="price-name">Самолігуюча металічна брекет-система (1 щелепа)</span><div class="price-dots"></div><span class="price-val">19 500 грн</span></div>
+      <div class="price-item"><span class="price-name">Сапфірова брекет-система (1 щелепа)</span><div class="price-dots"></div><span class="price-val">17 000 грн</span></div>
+      <div class="price-item"><span class="price-name">Наступний прийом (заміна лігатур, дуги)</span><div class="price-dots"></div><span class="price-val">від 600 грн</span></div>
+      <div class="price-item"><span class="price-name">Зняття брекет-системи (1 щелепа)</span><div class="price-dots"></div><span class="price-val">2 500 грн</span></div>
+      <div class="price-item"><span class="price-name">Фіксація ретейнера (1 щелепа)</span><div class="price-dots"></div><span class="price-val">2 000 грн</span></div>
+      <div class="price-item"><span class="price-name">Зняття ретейнера (1 щелепа)</span><div class="price-dots"></div><span class="price-val">1 000 грн</span></div>
+      <div class="price-item"><span class="price-name">Обслуговування ретейнера</span><div class="price-dots"></div><span class="price-val">500 грн</span></div>
+    </div>
+
+    <div class="price-panel" id="tab-surgery">
+      <div class="price-item"><span class="price-name">Премедикація</span><div class="price-dots"></div><span class="price-val">500 грн</span></div>
+      <div class="price-item"><span class="price-name">Видалення 1 кореневого зуба</span><div class="price-dots"></div><span class="price-val">500 грн</span></div>
+      <div class="price-item"><span class="price-name">Видалення 2 кореневого зуба</span><div class="price-dots"></div><span class="price-val">1 000 грн</span></div>
+      <div class="price-item"><span class="price-name">Видалення 3 кореневого зуба</span><div class="price-dots"></div><span class="price-val">1 500 грн</span></div>
+      <div class="price-item"><span class="price-name">Видалення зуба мудрості (типове)</span><div class="price-dots"></div><span class="price-val">1 500 грн</span></div>
+      <div class="price-item"><span class="price-name">Видалення зуба атипове</span><div class="price-dots"></div><span class="price-val">2 500 грн</span></div>
+      <div class="price-item"><span class="price-name">Видалення ретинованого зуба</span><div class="price-dots"></div><span class="price-val">4 200 грн</span></div>
+      <div class="price-item"><span class="price-name">Реімлантація</span><div class="price-dots"></div><span class="price-val">4 500 грн</span></div>
+      <div class="price-item"><span class="price-name">Цистектомія (видалення кіст)</span><div class="price-dots"></div><span class="price-val">2 200–4 500 грн</span></div>
+      <div class="price-item"><span class="price-name">Гострий перикоронарит</span><div class="price-dots"></div><span class="price-val">1 200 грн</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy-section" id="about">
+  <div class="philosophy-inner">
+    <div class="philosophy-left">
+      <p class="section-label reveal">Наша філософія</p>
+      <h2 class="philosophy-title reveal reveal-delay-1">Ми не боїмось<br><em>складних випадків</em></h2>
+      <div class="divider reveal reveal-delay-2"></div>
+      <p class="philosophy-body reveal reveal-delay-2">Якщо є хоча б найменший шанс зберегти природний зуб — ми обов'язково це зробимо. Нам довіряють найскладніші клінічні ситуації, бо ми підходимо до кожного пацієнта індивідуально, без поспіху.</p>
+    </div>
+    <div class="philosophy-pillars">
+      <div class="pillar reveal">
+        <h4 class="pillar-title">Зберігаємо зуби</h4>
+        <p class="pillar-text">Коли інші кажуть «видаляти», ми шукаємо способи зберегти. Мікроскоп, сучасні матеріали та досвід — наша зброя.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-1">
+        <h4 class="pillar-title">Безболісно</h4>
+        <p class="pillar-text">Сучасна анестезія та м'який підхід. Багато наших пацієнтів прийшли після того, як перестали боятись стоматології саме у нас.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <h4 class="pillar-title">Прозоро</h4>
+        <p class="pillar-text">Детальний план лікування, чіткі ціни, жодних сюрпризів. Ви завжди знаєте, що відбувається і скільки коштує.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="process-inner">
+    <p class="section-label reveal">Як це працює</p>
+    <h2 class="section-title reveal reveal-delay-1">Шлях<br><em>пацієнта</em></h2>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Консультація</h3>
+        <p class="step-desc">Детальна розмова з лікарем про ваші скарги, побажання та страхи. Без поспіху.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Діагностика</h3>
+        <p class="step-desc">Знімки, огляд, аналіз стану — повна картина для точного діагнозу.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <h3 class="step-title">План лікування</h3>
+        <p class="step-desc">Покроковий план із вартістю кожного етапу. Ви приймаєте рішення усвідомлено.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <h3 class="step-title">Лікування</h3>
+        <p class="step-desc">Комфортно, точно, без болю. З увагою до деталей на кожному кроці.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <p class="section-label reveal">Контакти</p>
+      <h2 class="section-title reveal reveal-delay-1">Запишіться<br><em>до нас</em></h2>
+      <div class="contact-detail">
+        <div class="contact-row reveal">
+          <span class="contact-row-label">Телефон</span>
+          <span class="contact-row-val"><a href="tel:+380964303719">+380 96 430 37 19</a></span>
+        </div>
+        <div class="contact-row reveal reveal-delay-1">
+          <span class="contact-row-label">Адреса</span>
+          <span class="contact-row-val" style="font-size:17px;">вул. Федора Караманиць (Ватутіна), 43/3А, Кривий Ріг</span>
+        </div>
+        <div class="contact-row reveal reveal-delay-2">
+          <span class="contact-row-label">Графік роботи</span>
+          <div class="hours-grid">
+            <span class="hours-day">Пн – Пт</span><span class="hours-time">9:00 – 19:00</span>
+            <span class="hours-day">Субота</span><span class="hours-time">9:00 – 14:00</span>
+            <span class="hours-day">Неділя</span><span class="hours-time">9:00 – 16:00</span>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-3" style="margin-top: 12px;">
+          <a href="tel:+380964303719" class="btn-primary" style="display:inline-block;">Зателефонувати</a>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="map-placeholder">
+        <div class="map-label">
+          вул. Федора Караманиць (Ватутіна), 43/3А<br>
+          Кривий Ріг
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <p class="section-label reveal">Зробіть перший крок</p>
+  <h2 class="cta-title reveal reveal-delay-1">Запишіться на<br><em>консультацію сьогодні</em></h2>
+  <p class="cta-sub reveal reveal-delay-2">Перший огляд — це просто розмова. Без зобов'язань.</p>
+  <a href="#contact" class="btn-primary reveal reveal-delay-3">Записатись зараз</a>
+  <a href="tel:+380964303719" class="cta-phone reveal reveal-delay-4">+380 96 430 37 19</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Bella Dent Clinic</span>
+  <span>вул. Ватутіна 43/3А, Кривий Ріг</span>
+  <span>© 2024 Bella Dent Clinic</span>
+</footer>
+
+<script>
+  // NAV scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Pricing tabs
+  function switchTab(id, btn) {
+    document.querySelectorAll('.price-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
